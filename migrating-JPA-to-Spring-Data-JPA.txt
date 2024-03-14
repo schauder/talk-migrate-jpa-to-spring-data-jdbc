@@ -1,0 +1,32 @@
+Migrate a Spring Data JPA project to Spring Data JDBC
+
+* Why do you want to do it?
+* General strategy: Baby Steps
+Every step is an improvement.
+You can revert the current (incomplete) step at will, without loosing much money or time
+* General requirement: You have good tests
+* Required Understanding: What is an aggregate.
+
+* Identify proper Aggregates, doesn't have to be complete
+: While JPA aggregates exists
+* Pick one Aggregate. Fewer connections to other aggregates is better
+* make sure `save` is properly called.
+: foreach connection
+* Disable cascading when it crosses Aggregate boundaries.
+* Ensure cascading is present and only a single Repository is used for entities in single aggregates.
+* Break connections (both directions). This will trigger failures when relying on cascading.
+  * Bidirectional relationships become one directional, backreference replaced by lookup (between aggregates) or aggregate logic (internal to aggregate)
+  * References to other aggregates become ids.
+  * M:N Relationships: Who owns the relationship table? Make that table explicit. Adjust references and cascading accordingly
+: endfor connection
+* extract validation (Validation is not the job of an ORM, ideally entities are always valid)
+
+// convert to JDBC aggregate
+* Id generation
+* mapping of columns (possibly write custom converters and migrate to dedicated types)
+
+// clean up
+Redundant reads?
+
+: endwhile JPA aggregates
+* Setup Spring Data JDBC to connect to the same database
