@@ -1,5 +1,7 @@
 Migrate a Spring Data JPA project to Spring Data JDBC
 
+Outline
+
 * Why do you want to do it?
 * General strategy: Baby Steps
 Every step is an improvement.
@@ -30,3 +32,10 @@ Redundant reads?
 
 : endwhile JPA aggregates
 * Setup Spring Data JDBC to connect to the same database
+
+
+Notes:
+Example domain: Warehouse: Location, Product, Order, Package, Customer
+
+TODO:
+- create JPA application
