@@ -36,7 +36,18 @@ You can revert the current (incomplete) step at will, without loosing much money
 : endForEach aggregates
 
 Notes:
-Example domain: Warehouse: Location, Product, Order, Package, Customer
+Example domain: Warehouse: Location, Product, Order, Package, Shipment, Customer
 
 TODO:
-- create JPA application
+- create JPA model
+  x cascading
+  x sub aggregate Repository
+  x bidirectional between Aggregates
+  x bidirectional within Aggregate
+  x M:N Relationship
+  - extract validation
+  - redundant reads
+- create service with antipatterns
+  - misusing cascade
+  - use subaggregate Repository
+  
