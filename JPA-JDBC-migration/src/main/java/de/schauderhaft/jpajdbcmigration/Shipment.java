@@ -4,7 +4,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -17,8 +16,9 @@ public class Shipment {
 	@GeneratedValue
 	private Long id;
 
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Address address;
+	private Customer customer;
 
 	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL)
 	private List<Item> items = new ArrayList<>();
@@ -29,5 +29,13 @@ public class Shipment {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 }

@@ -9,13 +9,16 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Address {
+public class Customer {
 	@Id
 	@GeneratedValue
 	private Long id;
 
-	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	List<Shipment> shipments;
+
+
+	private String name;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -23,5 +26,14 @@ public class Address {
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setName(String name) {
+
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

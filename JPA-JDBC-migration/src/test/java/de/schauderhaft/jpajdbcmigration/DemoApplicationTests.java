@@ -35,4 +35,14 @@ class DemoApplicationTests {
 		assertThat(products.findById(saved.getId()).orElseThrow().getDescription()).isEqualTo("new Description");
 	}
 
+	@Test
+	void shipToNewCustomer() {
+
+		Shipment newShipment = demoService.createNewShipment("Jens");
+
+		Shipment loaded = shipments.findById(newShipment.getId()).orElseThrow();
+
+		assertThat(loaded.getCustomer().getName()).isEqualTo("Jens");
+	}
+
 }
