@@ -19,6 +19,7 @@ public class Product {
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Category> categories = new ArrayList<>();
+	private String description;
 
 	public String getName() {
 		return name;
@@ -35,5 +36,14 @@ public class Product {
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setDescription(String description) {
+
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 }
