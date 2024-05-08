@@ -14,10 +14,6 @@ public class Customer {
 	@GeneratedValue
 	private Long id;
 
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	List<Shipment> shipments;
-
-
 	private String name;
 
 	public void setId(Long id) {
