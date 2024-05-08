@@ -22,9 +22,6 @@ public class DemoService {
 	CustomerRepository customers;
 
 	@Autowired
-	ItemRepository items;
-
-	@Autowired
 	CategoryRepository categories;
 
 	Product updateProductDescription(Long productId, String newDescription) {
@@ -56,7 +53,9 @@ public class DemoService {
 	}
 
 	void incrementQuantity(Long itemId, Integer increment) {
-		Item item = items.findById(itemId).orElseThrow();
+
+		Shipment shipment = shipments.findByItemsId(itemId);
+		Item item = shipment.getItems().stream().filter(i -> i.getId().equals(itemId)).findFirst().orElseThrow();
 		Integer oldQuantity = item.getQuantity();
 		item.setQuantity(oldQuantity + increment);
 
