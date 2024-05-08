@@ -16,7 +16,7 @@ You can revert the current (incomplete) step at will, without loosing much money
   : ForEach connection
     * Disable cascading when it crosses Aggregate boundaries.
     * Ensure cascading is present and only a single Repository is used for entities in single aggregates.
-    * Break connections (both directions). This will trigger failures when relying on cascading.
+    * Break connections between aggregates (both directions). This will trigger failures when relying on cascading.
       * Bidirectional relationships become one directional, backreference replaced by lookup (between aggregates) or aggregate logic (internal to aggregate)
       * References to other aggregates become ids.
       * M:N Relationships: Who owns the relationship table? Make that table explicit. Adjust references and cascading accordingly
@@ -50,4 +50,3 @@ TODO:
 - create service with antipatterns
   - misusing cascade
   - use subaggregate Repository
-  

@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @Transactional
 public class DemoService {
@@ -19,6 +22,9 @@ public class DemoService {
 
 	@Autowired
 	ItemRepository items;
+
+	@Autowired
+	CategoryRepository categories;
 
 	Product updateProductDescription(Long productId, String newDescription) {
 
@@ -52,5 +58,6 @@ public class DemoService {
 		Item item = items.findById(itemId).orElseThrow();
 		Integer oldQuantity = item.getQuantity();
 		item.setQuantity(oldQuantity + increment);
+
 	}
 }

@@ -15,6 +15,8 @@ class DemoApplicationTests {
 	@Autowired
 	ProductRepository products;
 	@Autowired
+	CategoryRepository categories;
+	@Autowired
 	TransactionTemplate txTemplate;
 
 	@Autowired
@@ -59,6 +61,19 @@ class DemoApplicationTests {
 
 		assertThat(shipments.findById(saved.getId()).orElseThrow().getItems().get(0).getQuantity()).isEqualTo(23);
 
+	}
+
+	@Test
+	void assignCategories() {
+
+		Product product = new Product();
+		product.setName("Minion");
+		product = products.save(product);
+
+		Category toy = categories.save(Category.of("Toy"));
+		Category licensed = categories.save(Category.of("Licensed"));
+
+		demoService.assignProductCategories(product.getId(), toy.getId(), licensed.getId());
 	}
 
 }
