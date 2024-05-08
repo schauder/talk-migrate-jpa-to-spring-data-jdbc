@@ -1,10 +1,15 @@
 package de.schauderhaft.jpajdbcmigration;
 
+import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Arrays.*;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -16,8 +21,12 @@ class DemoApplicationTests {
 	ProductRepository products;
 	@Autowired
 	CategoryRepository categories;
+
+
 	@Autowired
 	TransactionTemplate txTemplate;
+@Autowired
+	EntityManager entityManager;
 
 	@Autowired
 	DemoService demoService;
@@ -75,5 +84,38 @@ class DemoApplicationTests {
 
 		demoService.assignProductCategories(product.getId(), toy.getId(), licensed.getId());
 	}
+
+
+	@Test
+	void productsByCategory() {
+
+		Category tool = categories.save(Category.of("Tool"));
+		Category toy = categories.save(Category.of("Toy"));
+		Category licensed = categories.save(Category.of("Licensed"));
+
+		createProduct("Minion", toy, licensed);
+		createProduct("Axe", tool, toy);
+		createProduct("Hammer", tool); // a hammer is no toy!
+		List<Product> tools = demoService.productsByCategoryName("Tool");
+
+		assertThat(tools).extracting("name").containsExactlyInAnyOrder("Axe", "Hammer");
+	}
+
+	private void createProduct(String name, Category... categoriesToAdd) {
+
+		txTemplate.executeWithoutResult(tx -> {
+			Product product = new Product();
+			product.setName(name);
+
+			List<Category> managedCategories = new ArrayList<>();
+			for (Category category : categoriesToAdd) {
+				managedCategories.add(categories.getReferenceById(category.getId()));
+			}
+
+			product.setCategories(managedCategories);
+			products.save(product);
+		});
+	}
+
 
 }

@@ -1,5 +1,6 @@
 package de.schauderhaft.jpajdbcmigration;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,5 +60,13 @@ public class DemoService {
 		Integer oldQuantity = item.getQuantity();
 		item.setQuantity(oldQuantity + increment);
 
+	}
+
+	List<Product> productsByCategoryName(String categoryName) {
+
+		List<Product> products = categories.findByName(categoryName).getProducts();
+		// Yes, by asking you for the products I tried to indicate that I wanted the products and not some f-ing empty wrappers!
+		Hibernate.initialize(products);
+		return products;
 	}
 }
