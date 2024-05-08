@@ -1,7 +1,6 @@
 package de.schauderhaft.jpajdbcmigration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.internal.CustomizerRegistry;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +16,9 @@ public class DemoService {
 
 	@Autowired
 	CustomerRepository customers;
+
+	@Autowired
+	ItemRepository items;
 
 	Product updateProductDescription(Long productId, String newDescription) {
 
@@ -46,5 +48,9 @@ public class DemoService {
 		return shipments.save(shipment);
 	}
 
-
+	void incrementQuantity(Long itemId, Integer increment) {
+		Item item = items.findById(itemId).orElseThrow();
+		Integer oldQuantity = item.getQuantity();
+		item.setQuantity(oldQuantity + increment);
+	}
 }

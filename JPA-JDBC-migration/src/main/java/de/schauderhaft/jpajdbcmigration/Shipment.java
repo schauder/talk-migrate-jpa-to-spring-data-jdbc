@@ -2,6 +2,7 @@ package de.schauderhaft.jpajdbcmigration;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -20,7 +21,7 @@ public class Shipment {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Customer customer;
 
-	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Item> items = new ArrayList<>();
 
 	public void setId(Long id) {
@@ -37,5 +38,13 @@ public class Shipment {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
 	}
 }

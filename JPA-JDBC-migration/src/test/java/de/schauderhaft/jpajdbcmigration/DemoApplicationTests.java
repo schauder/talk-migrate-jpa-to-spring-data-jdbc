@@ -45,4 +45,20 @@ class DemoApplicationTests {
 		assertThat(loaded.getCustomer().getName()).isEqualTo("Jens");
 	}
 
+	@Test
+	void incrementQuantity() {
+
+		Shipment shipment = new Shipment();
+		Item item = new Item();
+		item.setQuantity(10);
+		shipment.getItems().add(item);
+		item.shipment = shipment;
+		Shipment saved = shipments.save(shipment);
+
+		demoService.incrementQuantity(item.getId(), 13);
+
+		assertThat(shipments.findById(saved.getId()).orElseThrow().getItems().get(0).getQuantity()).isEqualTo(23);
+
+	}
+
 }
