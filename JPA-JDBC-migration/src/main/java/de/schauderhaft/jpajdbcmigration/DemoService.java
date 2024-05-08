@@ -74,9 +74,9 @@ public class DemoService {
 
 	List<Product> productsByCategoryName(String categoryName) {
 
-		List<Product> products = categories.findByName(categoryName).getProducts();
+		List<Product> productList = products.findByCategoriesName(categoryName);
 		// Yes, by asking you for the products I tried to indicate that I wanted the products and not some f-ing empty wrappers!
-		Hibernate.initialize(products);
-		return products;
+		Hibernate.initialize(productList);
+		return productList;
 	}
 }

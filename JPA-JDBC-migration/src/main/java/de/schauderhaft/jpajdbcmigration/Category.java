@@ -16,8 +16,6 @@ public class Category {
 	private Long id;
 
 	private String name;
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "categories")
-	private List<Product> products = new ArrayList<>();
 
 	public static Category of(String name) {
 		Category category = new Category();
@@ -41,13 +39,5 @@ public class Category {
 
 	public String getName() {
 		return name;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
 	}
 }

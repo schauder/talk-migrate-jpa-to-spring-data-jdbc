@@ -4,8 +4,9 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,8 @@ public class Product {
 	@GeneratedValue
 	private Long id;
 	String name;
-
 	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(joinColumns = {@JoinColumn(name = "products_id")})
 	private List<Category> categories = new ArrayList<>();
 	private String description;
 
@@ -29,22 +30,21 @@ public class Product {
 		this.name = name;
 	}
 
+	public Long getId() {
+		return id;
+	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Long getId() {
-		return id;
+	public String getDescription() {
+		return description;
 	}
 
 	public void setDescription(String description) {
 
 		this.description = description;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public List<Category> getCategories() {
