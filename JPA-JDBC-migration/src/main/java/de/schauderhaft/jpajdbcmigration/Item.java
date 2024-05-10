@@ -14,9 +14,7 @@ public class Item {
 	@GeneratedValue
 	private Long id;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
-	private Product product;
+	private Long productId;
 	private Integer quantity;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -33,12 +31,12 @@ public class Item {
 	}
 
 
-	public Product getProduct() {
-		return product;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(Long product) {
+		this.productId = product;
 	}
 
 	public void setId(Long id) {
