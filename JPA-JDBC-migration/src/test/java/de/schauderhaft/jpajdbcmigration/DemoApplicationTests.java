@@ -108,9 +108,9 @@ class DemoApplicationTests {
 			Product product = new Product();
 			product.setName(name);
 
-			List<Category> managedCategories = new ArrayList<>();
+			List<ProductCategory> managedCategories = new ArrayList<>();
 			for (Category category : categoriesToAdd) {
-				managedCategories.add(categories.getReferenceById(category.getId()));
+				managedCategories.add(ProductCategory.of(product, categories.getReferenceById(category.getId())));
 			}
 
 			product.setCategories(managedCategories);

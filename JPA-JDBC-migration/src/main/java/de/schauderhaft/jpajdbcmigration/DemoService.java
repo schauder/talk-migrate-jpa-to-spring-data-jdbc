@@ -64,9 +64,9 @@ public class DemoService {
 	void assignProductCategories(Long productId, Long... categoryIds) {
 
 		Product product = products.findById(productId).orElseThrow();
-		List<Category> categoryList = new ArrayList<>();
+		List<ProductCategory> categoryList = new ArrayList<>();
 		for (Long categoryId : categoryIds) {
-			categoryList.add(categories.getReferenceById(categoryId));
+			categoryList.add(ProductCategory.of(product,categories.getReferenceById(categoryId)));
 		}
 
 		product.setCategories(categoryList);
@@ -74,7 +74,7 @@ public class DemoService {
 
 	List<Product> productsByCategoryName(String categoryName) {
 
-		List<Product> productList = products.findByCategoriesName(categoryName);
+		List<Product> productList = products.findByCategoriesCategoryName(categoryName);
 		// Yes, by asking you for the products I tried to indicate that I wanted the products and not some f-ing empty wrappers!
 		Hibernate.initialize(productList);
 		return productList;
