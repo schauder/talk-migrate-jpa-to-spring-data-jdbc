@@ -17,6 +17,9 @@ public class Product {
 	private Long id;
 	String name;
 
+	// special case:
+	// JPA needs an id for all entities since it doesn't know of aggregates
+	// This prevents us from removing the mappedBy since it creates that id.
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
 	private List<ProductCategory> categories = new ArrayList<>();
 	private String description;
