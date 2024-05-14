@@ -7,13 +7,18 @@ import java.util.List;
 
 public interface ProductRepository extends ListCrudRepository<Product, Long> {
 
-	@Query("""
-				select p
-				from Product p
-				join p.categories pc
-				join Category c
-				on pc.categoryId = c.id
-				where c.name = :categoryName
-			""")
+	@Query(value = """
+			select * 
+			from product 
+			where id in (
+				select products_id 
+				from product_categories pc 
+				join category c 
+					on pc.categories_id = c.id 
+					where c.name = :categoryName
+			)
+			""",
+			nativeQuery = true
+	)
 	List<Product> findByCategoriesCategoryName(String categoryName);
 }
