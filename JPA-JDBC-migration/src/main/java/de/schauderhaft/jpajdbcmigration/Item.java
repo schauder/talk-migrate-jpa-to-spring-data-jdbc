@@ -20,7 +20,6 @@ public class Item {
 	private Integer quantity;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn
 	Shipment shipment;
 
 	// index in the list of items
