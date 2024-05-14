@@ -69,6 +69,8 @@ public class DemoService {
 		}
 
 		product.setCategories(categoryList);
+
+		products.save(product);
 	}
 
 	List<Product> productsByCategoryName(String categoryName) {
