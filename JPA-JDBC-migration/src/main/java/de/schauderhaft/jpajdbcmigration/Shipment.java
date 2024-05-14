@@ -6,7 +6,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 
@@ -20,8 +19,7 @@ public class Shipment {
 	private Long id;
 
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Customer customer;
+	private Long customerId;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "shipment_id")
@@ -36,12 +34,12 @@ public class Shipment {
 		return id;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 
 	public List<Item> getItems() {

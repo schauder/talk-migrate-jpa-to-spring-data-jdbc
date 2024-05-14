@@ -9,7 +9,6 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Arrays.*;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
@@ -21,11 +20,12 @@ class DemoApplicationTests {
 	ProductRepository products;
 	@Autowired
 	CategoryRepository categories;
-
+	@Autowired
+	CustomerRepository customers;
 
 	@Autowired
 	TransactionTemplate txTemplate;
-@Autowired
+	@Autowired
 	EntityManager entityManager;
 
 	@Autowired
@@ -53,7 +53,7 @@ class DemoApplicationTests {
 
 		Shipment loaded = shipments.findById(newShipment.getId()).orElseThrow();
 
-		assertThat(loaded.getCustomer().getName()).isEqualTo("Jens");
+		assertThat(customers.findById(loaded.getCustomerId()).orElseThrow().getName()).isEqualTo("Jens");
 	}
 
 	@Test

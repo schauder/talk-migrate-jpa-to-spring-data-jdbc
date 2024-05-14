@@ -43,11 +43,10 @@ public class DemoService {
 		if (customer == null) {
 			customer = new Customer();
 			customer.setName(customerName);
+			customer = customers.save(customer);
 		}
-		shipment.setCustomer(customer);
 
-
-		// JPA does automagical saving via cascading
+		shipment.setCustomerId(customer.getId());
 
 		return shipments.save(shipment);
 	}
