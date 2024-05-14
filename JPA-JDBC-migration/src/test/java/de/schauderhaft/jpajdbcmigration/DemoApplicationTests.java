@@ -109,7 +109,7 @@ class DemoApplicationTests {
 
 			List<ProductCategory> managedCategories = new ArrayList<>();
 			for (Category category : categoriesToAdd) {
-				managedCategories.add(ProductCategory.of(product, categories.getReferenceById(category.getId())));
+				managedCategories.add(ProductCategory.of(product, category.getId()));
 			}
 
 			product.setCategories(managedCategories);
