@@ -62,6 +62,17 @@ public class DemoService {
 
 	}
 
+	void assignProductCategories(Long productId, Long... categoryIds) {
+
+		Product product = products.findById(productId).orElseThrow();
+		List<Category> categoryList = new ArrayList<>();
+		for (Long categoryId : categoryIds) {
+			categoryList.add(categories.getReferenceById(categoryId));
+		}
+
+		product.setCategories(categoryList);
+	}
+
 	List<Product> productsByCategoryName(String categoryName) {
 
 		List<Product> products = categories.findByName(categoryName).getProducts();
