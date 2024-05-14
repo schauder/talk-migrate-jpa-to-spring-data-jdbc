@@ -1,7 +1,7 @@
 package de.schauderhaft.jpajdbcmigration;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.ListCrudRepository;
 
-interface CategoryRepository extends JpaRepository<Category, Long> {
+interface CategoryRepository extends ListCrudRepository<Category, Long> {
 	Category findByName(String name);
 }
