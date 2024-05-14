@@ -64,7 +64,6 @@ class DemoApplicationTests {
 		item.setQuantity(10);
 		shipment.getItems().add(item);
 		item.index = shipment.getItems().size()-1;
-		item.shipment = shipment;
 		Shipment saved = shipments.save(shipment);
 
 		demoService.incrementQuantity(item.getId(), 13);

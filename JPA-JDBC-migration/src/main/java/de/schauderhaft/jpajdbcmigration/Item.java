@@ -1,11 +1,8 @@
 package de.schauderhaft.jpajdbcmigration;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Item {
@@ -16,9 +13,6 @@ public class Item {
 
 	private Long productId;
 	private Integer quantity;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	Shipment shipment;
 
 	// index in the list of items
 	Integer index;
