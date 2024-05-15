@@ -6,21 +6,29 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IdGenerator implements BeforeConvertCallback<Category> {
+public class IdGenerator implements BeforeConvertCallback<Object> {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
 	@Override
-	public Category onBeforeConvert(Category category) {
+	public Object onBeforeConvert(Object root) {
 
-		if (category.getId() == null) {
-			category.setId(obtainId());
+		if (root instanceof Category category) {
+			if (category.getId() == null) {
+				category.setId(obtainId("category"));
+			}
+		} else if (root instanceof Customer customer) {
+			if (customer.getId() == null) {
+				customer.setId(obtainId("customer"));
+			}
 		}
-		return category;
+		return root;
 	}
 
-	private Long obtainId() {
-		return jdbcTemplate.queryForObject("values next value for category_seq", Long.class);
+	private Long obtainId(String sequenceNamePrefix) {
+		Long idValue = jdbcTemplate.queryForObject("values next value for " + sequenceNamePrefix + "_seq", Long.class);
+		System.out.println(sequenceNamePrefix + " " + idValue);
+		return idValue;
 	}
 }

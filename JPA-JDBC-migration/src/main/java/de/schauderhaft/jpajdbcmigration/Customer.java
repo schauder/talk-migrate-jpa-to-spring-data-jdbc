@@ -1,13 +1,12 @@
 package de.schauderhaft.jpajdbcmigration;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
+@Table
 public class Customer {
+
 	@Id
-	@GeneratedValue
 	private Long id;
 
 	private String name;
