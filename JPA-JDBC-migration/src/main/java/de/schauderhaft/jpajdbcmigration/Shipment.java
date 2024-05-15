@@ -1,29 +1,22 @@
 package de.schauderhaft.jpajdbcmigration;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+import org.springframework.data.relational.core.mapping.Table;
 import jakarta.persistence.OrderBy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Table
 public class Shipment {
 	@Id
-	@GeneratedValue
 	private Long id;
-
 
 	private Long customerId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "shipment_id")
-	@OrderBy("index")
+	@MappedCollection(idColumn = "SHIPMENT_ID", keyColumn = "INDEX")
 	private List<Item> items = new ArrayList<>();
 
 	public void setId(Long id) {

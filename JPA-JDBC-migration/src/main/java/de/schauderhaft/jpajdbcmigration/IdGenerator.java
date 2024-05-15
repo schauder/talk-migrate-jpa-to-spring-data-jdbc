@@ -22,9 +22,18 @@ public class IdGenerator implements BeforeConvertCallback<Object> {
 			if (customer.getId() == null) {
 				customer.setId(obtainId("customer"));
 			}
-		}else if (root instanceof Product product) {
+		} else if (root instanceof Product product) {
 			if (product.getId() == null) {
 				product.setId(obtainId("product"));
+			}
+		} else if (root instanceof Shipment shipment) {
+			if (shipment.getId() == null) {
+				shipment.setId(obtainId("shipment"));
+			}
+			for (Item item : shipment.getItems()) {
+				if (item.getId() == null) {
+					item.setId(obtainId("item"));
+				}
 			}
 		}
 		return root;

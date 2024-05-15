@@ -58,6 +58,7 @@ public class DemoService {
 		Integer oldQuantity = item.getQuantity();
 		item.setQuantity(oldQuantity + increment);
 
+		shipments.save(shipment);
 	}
 
 	void assignProductCategories(Long productId, Long... categoryIds) {
