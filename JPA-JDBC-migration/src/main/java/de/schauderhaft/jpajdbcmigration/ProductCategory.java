@@ -1,43 +1,21 @@
 package de.schauderhaft.jpajdbcmigration;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
-@Table(name = "product_categories")
+@Table(name = "PRODUCT_CATEGORIES")
 public class ProductCategory {
 
-	static ProductCategory of(Product product, Long category) {
+	static ProductCategory of(Long category) {
 
 		ProductCategory productCategory = new ProductCategory();
-		productCategory.setProduct(product);
 		productCategory.setCategoryId(category);
 
 		return productCategory;
 	}
 
-
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "products_id")
-	Product product;
-
-	@Id
-	@Column(name = "categories_id")
+	@Column("CATEGORIES_ID")
 	Long categoryId;
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 
 	public Long getCategoryId() {
 		return categoryId;

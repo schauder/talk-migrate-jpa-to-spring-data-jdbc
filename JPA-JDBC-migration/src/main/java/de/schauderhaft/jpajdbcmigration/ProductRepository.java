@@ -1,13 +1,13 @@
 package de.schauderhaft.jpajdbcmigration;
 
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;
 
 public interface ProductRepository extends ListCrudRepository<Product, Long> {
 
-	@Query(value = """
+	@Query("""
 			select * 
 			from product 
 			where id in (
@@ -17,8 +17,7 @@ public interface ProductRepository extends ListCrudRepository<Product, Long> {
 					on pc.categories_id = c.id 
 					where c.name = :categoryName
 			)
-			""",
-			nativeQuery = true
+			"""
 	)
 	List<Product> findByCategoriesCategoryName(String categoryName);
 }

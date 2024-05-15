@@ -7,7 +7,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -107,9 +109,9 @@ class DemoApplicationTests {
 			Product product = new Product();
 			product.setName(name);
 
-			List<ProductCategory> managedCategories = new ArrayList<>();
+			Set<ProductCategory> managedCategories = new HashSet<>();
 			for (Category category : categoriesToAdd) {
-				managedCategories.add(ProductCategory.of(product, category.getId()));
+				managedCategories.add(ProductCategory.of(category.getId()));
 			}
 
 			product.setCategories(managedCategories);

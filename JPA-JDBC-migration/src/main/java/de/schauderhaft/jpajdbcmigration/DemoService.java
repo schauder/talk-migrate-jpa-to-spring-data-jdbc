@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 @Transactional
@@ -31,9 +33,7 @@ public class DemoService {
 
 		product.setDescription(newDescription);
 
-		// JPA does automagical saving via dirty tracking
-
-		return product;
+		return products.save(product);
 	}
 
 	Shipment createNewShipment(String customerName) {
@@ -63,9 +63,9 @@ public class DemoService {
 	void assignProductCategories(Long productId, Long... categoryIds) {
 
 		Product product = products.findById(productId).orElseThrow();
-		List<ProductCategory> categoryList = new ArrayList<>();
+		Set<ProductCategory> categoryList = new HashSet<>();
 		for (Long categoryId : categoryIds) {
-			categoryList.add(ProductCategory.of(product,categoryId));
+			categoryList.add(ProductCategory.of(categoryId));
 		}
 
 		product.setCategories(categoryList);
