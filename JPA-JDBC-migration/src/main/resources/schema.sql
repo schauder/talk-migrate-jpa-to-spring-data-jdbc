@@ -15,6 +15,7 @@ create table customer
 create table item
 (
     id          bigint not null,
+    index       integer not null,
     quantity    integer,
     product_id  bigint,
     shipment_id bigint,

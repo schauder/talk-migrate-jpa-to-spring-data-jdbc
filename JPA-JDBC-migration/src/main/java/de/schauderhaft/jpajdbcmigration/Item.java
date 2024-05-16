@@ -23,6 +23,8 @@ public class Item {
 	@JoinColumn
 	Shipment shipment;
 
+	// index in the list of items
+	Integer index;
 	public Integer getQuantity() {
 		return quantity;
 	}
