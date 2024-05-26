@@ -1,0 +1,6 @@
+== Migrate (Spring Data) JPA to Spring Data JDBC
+
+This is a project demonstrating the migrating from Spring Data JPA to Spring Data JDBC.
+
+The `main` branch contains the fully converted project, while `migration-start` contains the project in its Spring Data JPA version.
+The difference is a sequence of commits showing a stap by step migration.
